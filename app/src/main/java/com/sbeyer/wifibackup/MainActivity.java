@@ -53,10 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DbHelper(this);
 
-
-
         dataList = mydb.getDataSortedBySsid();
-        //Log.d("TESTLISTDA", dataList);
 
          if (!dataList.isEmpty()) {
 
@@ -94,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -113,10 +108,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_syncSavedWifi:
                 mydb.setData("WLAN_SJ_2.4GHz", "130504112303SB", "WPA2", "Simon & Joana", "erweitert WLAN_F", "Saarbrücker Straße 15, 33613 Bielefeld", "1", "25k", "tmp", "tmp", "2,4");
                 mydb.setData("WLAN_F", "JonasSimonMicha", "WPA2", "Frye", "leer", "Saarbrücker Straße 15", "1", "25k", "tmp", "tmp", "2,4");
-                mydb.setData("WLAN-TEST789", "testpwd", "TEST", "Dr. Nothdurft", "TESTKOMMENTAR3", "Bielefeld", "2", "25k", "tmp", "tmp", "2,4");
-                mydb.setData("ZZZZ", "testpwd", "TEST", "Dr. Nothdurft", "TESTKOMMENTAR3", "Bielefeld", "3", "25k", "tmp", "tmp", "2,4");
-                mydb.setData("WLAN-TEST782349", "testpwd", "TEST", "Dr. Brandt", "TESTKOMMENTAR3", "Bielefeld", "4", "25k", "tmp", "tmp", "2,4");
+                mydb.setData("krombacher", "das-einzig-wahre.", "WPA2", "Kristian & Mimi", "TESTKOMMENTAR3", "Paderborn", "2", "25k", "tmp", "tmp", "2,4");
+                mydb.setData("Kriminalpolizei Steinhagen", "01302513071908Beyer", "WPA2", "Familie Beyer", "!", "Bernhardstraße 6, Steinhagen", "3", "25k", "tmp", "tmp", "2,4");
+                mydb.setData("Grenzschutz Steinhagen", "01302513071908Beyer", "WPA2", "Familie Beyer", "TESTKOMMENTAR3", "Bernhardstraße 6, Steinhagen", "4", "25k", "tmp", "tmp", "2,4");
                 mydb.setData("WLAN-TEST782349", "testpwd", "TEST", "Dr. Bond", "TESTKOMMENTAR3", "Bielefeld", "5", "25k", "tmp", "tmp", "2,4");
+
+                reloadListView();
+
                 return true;
 
 
@@ -147,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openViewDialog(String Case, String[] selectedFromListArray){
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        Log.d("TEST", "SJS");
 
         View subViewPwdView = inflater.inflate(R.layout.view_details, null);
 
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         showPasswordTextView.setText(selectedFromListArray[2]);
 
-        if (Case.equals("Show")) {
+        if (Case.equals(getResources().getString(R.string.show))) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(selectedFromListArray[1]);
@@ -350,6 +349,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             builder.show();
+
         } else if (Case.equals("Edit")) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -479,10 +479,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performPopupAction(String title, String[] selectedArray){
-        if (title.equals(getResources().getString(R.string.popup_edit))){
+        if (title.equals(getResources().getString(R.string.edit))){
             openDialog(getResources().getString(R.string.edit), selectedArray);
 
-        }else if(title.equals(getResources().getString(R.string.popup_showDetails))){
+        }else if(title.equals(getResources().getString(R.string.popup_showPassword))){
+            Log.d("TEST", "SJS");
             openViewDialog(getResources().getString(R.string.show), selectedArray);
 
         }else if(title.equals(getResources().getString(R.string.popup_delete))){
