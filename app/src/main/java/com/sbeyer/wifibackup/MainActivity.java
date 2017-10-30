@@ -2,6 +2,7 @@ package com.sbeyer.wifibackup;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 
 import android.support.v7.app.AlertDialog;
@@ -21,6 +22,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import static com.sbeyer.wifibackup.R.id.editText_SSID;
 import static com.sbeyer.wifibackup.R.id.textView_showPassword;
@@ -106,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_syncSavedWifi:
+                List<WifiConfiguration> getConfiguredNetworks;
+                return true;
+
+            case R.id.action_fillDb:
                 mydb.setData("WLAN_SJ_2.4GHz", "130504112303SB", "WPA2", "Simon & Joana", "erweitert WLAN_F", "Saarbrücker Straße 15, 33613 Bielefeld", "1", "25k", "tmp", "tmp", "2,4");
                 mydb.setData("WLAN_F", "JonasSimonMicha", "WPA2", "Frye", "leer", "Saarbrücker Straße 15", "1", "25k", "tmp", "tmp", "2,4");
                 mydb.setData("krombacher", "das-einzig-wahre.", "WPA2", "Kristian & Mimi", "TESTKOMMENTAR3", "Paderborn", "2", "25k", "tmp", "tmp", "2,4");
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 reloadListView();
 
                 return true;
+
 
 
             case R.id.action_add:
@@ -483,7 +491,6 @@ public class MainActivity extends AppCompatActivity {
             openDialog(getResources().getString(R.string.edit), selectedArray);
 
         }else if(title.equals(getResources().getString(R.string.popup_showPassword))){
-            Log.d("TEST", "SJS");
             openViewDialog(getResources().getString(R.string.show), selectedArray);
 
         }else if(title.equals(getResources().getString(R.string.popup_delete))){

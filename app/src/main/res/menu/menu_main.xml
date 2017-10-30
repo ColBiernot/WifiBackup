@@ -20,4 +20,11 @@
         android:orderInCategory="100"
         android:title="Sync"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_fillDb"
+        android:orderInCategory="100"
+        android:title="fillDB"
+        app:showAsAction="never" />
+
 </menu>
